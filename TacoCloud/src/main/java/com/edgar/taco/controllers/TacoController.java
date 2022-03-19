@@ -1,9 +1,6 @@
 package com.edgar.taco.controllers;
 
-import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.edgar.taco.models.Ingredient;
-import com.edgar.taco.models.Ingredient.Type;
 import com.edgar.taco.models.Order;
 import com.edgar.taco.models.Taco;
 import com.edgar.taco.repositories.IngredientRepository;
@@ -55,8 +51,9 @@ public class TacoController {
 		List<Ingredient> ingredients = new ArrayList<>();
 		ingredientRepository.findAll().forEach((obj) -> ingredients.add(obj));
 		
-		Type[] types = Ingredient.Type.values();
-		for (Type type : types) {
+		System.out.println(ingredients);
+		
+		for (String type : Ingredient.TYPES) {
 			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
 		}
 		model.addAttribute("design", new Taco());
@@ -76,7 +73,7 @@ public class TacoController {
 		return "redirect:/orders/current";
 	}
 	
-	private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+	private List<Ingredient> filterByType(List<Ingredient> ingredients, String type) {
 		return ingredients
 				.stream().
 				filter((t) -> t.getType().equals(type))

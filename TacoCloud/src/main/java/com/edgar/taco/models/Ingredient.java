@@ -16,9 +16,10 @@ public class Ingredient {
 	@Id
 	private final String id;
 	private final String name;
-	private final Type type;
+	private final String type;
 	
-	public static enum Type {
-		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
-    }
+	public static String[] TYPES = {"WRAP", "PROTEIN", "VEGGIES", "CHEESE", "SAUCE"};
+//	public static enum Type {
+//		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+//    }
 }
